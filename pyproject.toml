@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "Claset-CommandLine"
+version = "0.1.0"
+description = ""
+authors = ["Puqns67 <me@puqns67.icu>"]
+license = "GPL-3.0-or-later"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+claset = {git = "https://github.com/Puqns67/Claset.git"}
+cmd2 = "^2.4.1"
+rich = "^12.4.4"
+
+[tool.poetry.dev-dependencies]
+black = "^22.6.0"
+Nuitka = "^0.9"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
