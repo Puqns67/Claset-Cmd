@@ -1,19 +1,20 @@
 [tool.poetry]
-name = "Claset-CommandLine"
+name = "Claset-Cmd"
 version = "0.1.0"
-description = ""
+description = "基于 Python 的 Minecraft 启动管理器核心 Claset 的命令行前端"
 authors = ["Puqns67 <me@puqns67.icu>"]
 license = "GPL-3.0-or-later"
 
 [tool.poetry.dependencies]
 python = "^3.10"
-claset = {git = "https://github.com/Puqns67/Claset.git"}
+claset-core = {git = "https://github.com/Puqns67/Claset-Core.git"}
 cmd2 = "^2.4.1"
 rich = "^12.4.4"
 
 [tool.poetry.dev-dependencies]
 black = "^22.6.0"
-Nuitka = "^0.9"
+Nuitka = "^0.9.4"
+ordered-set = "^4.1.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

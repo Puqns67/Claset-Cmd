@@ -7,12 +7,10 @@
 __author__ = "Puqns67"
 __productname__ = "Claset-Cmd"
 __version__ = "0.1.0"
-__build__ = 1
+__build__ = 2
 __fullversion__ = __version__ + "_" + str(__build__)
-__all__ = (
-    "Utils",
-    "CmdMainClass",
-)
 
-import Utils
+from . import Utils
 from .CmdMainClass import CmdMainClass
+
+__all__ = Utils.__all__ + ("CmdMainClass",)

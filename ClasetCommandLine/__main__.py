@@ -5,7 +5,7 @@ from sys import version, exit
 from platform import uname
 from time import time
 
-import ClasetCommandLine
+from . import __fullversion__
 from .Utils.I18n import getI18nProcessor
 from .Utils.ArgumentParsers import addArgumentToParsers
 from .CmdMainClass import CmdMainClass
@@ -25,7 +25,7 @@ def main(Debug: bool = False):
     Claset.ProcessLogs()
     Claset.GolbalLogger.info("Starting Claset-Cmd...")
     Claset.GolbalLogger.info(
-        "Claset-Core - Version: %s, Claset-Cmd - Version: %s,Powered By Python %s", Claset.__fullversion__, ClasetCommandLine.__fullversion__, version
+        "Claset-Core - Version: %s, Claset-Cmd - Version: %s, Powered By Python %s", Claset.__fullversion__, __fullversion__, version
     )
     Claset.GolbalLogger.info('Running in "%s"', " ".join(uname()))
 
