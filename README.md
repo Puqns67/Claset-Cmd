@@ -11,9 +11,9 @@
 | 库                                                        | 版本         |
 |-----------------------------------------------------------|-------------|
 |[Python](https://github.com/python/cpython)                |3.10.5       |
-|[Claset](https://github.com/Puqns67/Claset)                |Latest       |
+|[Claset-Core](https://github.com/Puqns67/Claset-Core)      |Latest       |
 |[cmd2](https://github.com/python-cmd2/cmd2)                |2.4.1        |
-|[rich](https://github.com/Textualize/rich)                 |12.4.4       |
+|[rich](https://github.com/Textualize/rich)                 |12.5.1       |
 |[PySocks](https://github.com/Anorov/PySocks)*              |1.7.1        |
 |[black](https://github.com/psf/black)**                    |22.6.0       |
 |[Nuitka](https://github.com/Nuitka/Nuitka)**               |0.9.4        |

@@ -1,0 +1,5 @@
+*
+!.gitignore
+!ArchiveExclude.txt
+!*.pot
+!*.po
