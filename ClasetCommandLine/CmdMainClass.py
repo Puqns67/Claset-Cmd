@@ -2,7 +2,7 @@
 
 from argparse import Namespace
 from time import sleep
-from typing import Any
+from typing import Callable
 
 from cmd2 import Cmd, with_argparser
 from rich.console import Console
@@ -29,10 +29,10 @@ class CmdMainClass(Cmd):
         """获取用于输出的 Rich Console"""
         return self.RichConsole
 
-    def setI18nProcessor(self, Method: Any) -> None:
+    def setI18nProcessor(self, Method: Callable[[str], str]) -> None:
         """设置 i18n 文字处理器"""
         self._ = Method
-        self.intro = self._("Claset - 内建命令行模式\n当前版本: {}").format(Claset.__fullversion__)
+        self.intro = self._("Claset-Cmd v{}").format(Claset.__fullversion__)
         self.prompt = self._("> ")
 
         # 使 Cmd2 的部分支持 i18n
@@ -42,7 +42,7 @@ class CmdMainClass(Cmd):
         self.help_error = self._("No help on {}")
         self.default_error = self._("{} is not a recognized command, alias, or macro")
 
-    def getI18n(self) -> Any:
+    def getI18nProcessor(self) -> Callable[[str], str]:
         """获取 i18n 文字处理器"""
         return self._
 
@@ -61,9 +61,7 @@ class CmdMainClass(Cmd):
         try:
             GameInstaller.InstallVanilla()
         except Claset.Game.Install.Exceptions.VanillaInstalled:
-            self.RichConsole.print(
-                self._('指定的版本名 "{}" 重复, 请使用其他版本名!').format(init.GameName)
-            )
+            self.RichConsole.print(self._('指定的版本名 "{}" 重复, 请使用其他版本名!').format(init.GameName))
             return
 
         InstallProgressBar = Progress(
@@ -140,7 +138,7 @@ class CmdMainClass(Cmd):
                     SaveTo=init.SaveToFile,
                 )
             except Claset.Game.Launch.Exceptions.UnsupportVersion:
-                self.RichConsole.print("")
+                self.RichConsole.print(self._("暂不支持此游戏版本"))
 
     def do_ListGame(self, _: Namespace):
         """列出所有游戏实例"""
@@ -153,9 +151,7 @@ class CmdMainClass(Cmd):
             self._("ID"), self._("实例名"), self._("实例版本"), self._("实例类型"), self._("实例位置")
         )
         for GameID in range(len(GameInfoList)):
-            GameTable.add_row(
-                str(GameID), *GameInfoList[GameID].getInfoStr().split("|")
-            )
+            GameTable.add_row(str(GameID), *GameInfoList[GameID].getInfoStr().split("|"))
 
         self.RichConsole.print(GameTable)
 
@@ -219,9 +215,7 @@ class CmdMainClass(Cmd):
                 if init.AccountName is None:
                     raise ValueError(self._("设置账户类型为离线时用户名不应为空"))
                 else:
-                    Account = self.AccountManager.create(
-                        Type=init.Type, Name=init.AccountName
-                    )
+                    Account = self.AccountManager.create(Type=init.Type, Name=init.AccountName)
             case _:
                 ValueError(init.Type)
         self.AccountManager.add(Account=Account)
@@ -267,9 +261,7 @@ class CmdMainClass(Cmd):
         else:
             AccountName = AccountList[0]["Name"]
             self.RichConsole.print(
-                self._('[green]已设置账户 "{AccountName}" 为默认账户').format(
-                    AccountName=AccountName
-                )
+                self._('[green]已设置账户 "{AccountName}" 为默认账户').format(AccountName=AccountName)
             )
             self.AccountManager.setDefault(AccountList[0]["ID"])
             self.AccountManager.save()
@@ -322,9 +314,7 @@ class CmdMainClass(Cmd):
                     )
                 else:
                     self.RichConsole.print(
-                        self._("已移除账户 {}, 将在下次启动时生效(完全从配置文件中移除)").format(
-                            AccountNameList
-                        )
+                        self._("已移除账户 {}, 将在下次启动时生效(完全从配置文件中移除)").format(AccountNameList)
                     )
                 self.AccountManager.save()
 

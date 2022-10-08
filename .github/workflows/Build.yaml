@@ -28,8 +28,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-        with:
-          submodules: 'true'
 
 
       - name: Install gettext
@@ -106,15 +104,6 @@ jobs:
             ${{ github.workspace }}\Run.onefile-build
           key: ${{ runner.os }}-nuitka-build-${{ steps.genReleaseTimes.outputs.tag }}
           restore-keys: ${{ runner.os }}-nuitka-build-
-
-
-      - name: Setting Build Environment
-        shell: pwsh
-        run: |
-          Write-Output "Copy & delete files"
-          Copy-Item ${{ github.workspace }}\Claset\Execution\${{ env.DEFAULT_MODULE_NAME }}\Run.py ${{ github.workspace }}\ -Verbose
-          Copy-Item ${{ github.workspace }}\Claset\Execution\${{ env.DEFAULT_MODULE_NAME }}\requirements_build.txt ${{ github.workspace }}\ -Verbose
-          Get-ChildItem -Path ${{ github.workspace }}\Claset\Execution\ -Exclude ${{ env.DEFAULT_MODULE_NAME }} -Recurse -Directory | Remove-Item -Recurse -Force -Verbose
 
 
       - name: Setting Python Environment
@@ -236,10 +225,6 @@ jobs:
       - name: Setting Build Environment
         shell: pwsh
         run: |
-          Write-Output "Copy & delete files"
-          Copy-Item ${{ github.workspace }}/Claset/Execution/${{ env.DEFAULT_MODULE_NAME }}/Run.py ${{ github.workspace }}/ -Verbose
-          Copy-Item ${{ github.workspace }}/Claset/Execution/${{ env.DEFAULT_MODULE_NAME }}/requirements_build.txt ${{ github.workspace }}/ -Verbose
-          Get-ChildItem -Path ${{ github.workspace }}/Claset/Execution/ -Exclude ${{ env.DEFAULT_MODULE_NAME }} -Recurse -Directory | Remove-Item -Recurse -Force -Verbose
           Write-Output "Install build tools"
           sudo apt-get install patchelf ccache
 

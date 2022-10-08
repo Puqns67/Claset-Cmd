@@ -10,7 +10,8 @@
 			"request": "launch",
 			"cwd": "${workspaceFolder}",
 			"module": "ClasetCommandLine",
-			"console": "integratedTerminal"
+			"console": "integratedTerminal",
+			"justMyCode": false
 		},
 		{
 			"name": "Debug Poetry",

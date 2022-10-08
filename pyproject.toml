@@ -1,21 +1,37 @@
-[tool.poetry]
+[project]
 name = "Claset-Cmd"
-version = "0.1.0"
 description = "基于 Python 的 Minecraft 启动管理器核心 Claset 的命令行前端"
-authors = ["Puqns67 <me@puqns67.icu>"]
-license = "GPL-3.0-or-later"
+authors = [
+    {name = "Puqns67", email = "me@puqns67.icu"},
+]
+dependencies = [
+    "Claset-Core @ git+https://github.com/Puqns67/Claset-Core.git@c616d08973f0578d66f8370b90469dae9cf4944c",
+    "cmd2>=2.4.2",
+    "rich>=12.5.1",
+]
+requires-python = ">=3.10"
+license = {text = "GPL-3.0-or-later"}
+dynamic = ["version"]
 
-[tool.poetry.dependencies]
-python = "^3.10"
-claset-core = {git = "https://github.com/Puqns67/Claset-Core.git"}
-cmd2 = "^2.4.1"
-rich = "^12.4.4"
+[project.optional-dependencies]
 
-[tool.poetry.dev-dependencies]
-black = "^22.6.0"
-Nuitka = "^0.9.4"
-ordered-set = "^4.1.0"
+[tool.pdm]
+version = { source = "file", path = "ClasetCommandLine/__init__.py" }
+
+[tool.pdm.dev-dependencies]
+formatter = [
+    "black>=22.8.0",
+]
+build = [
+    "nuitka>=1.0.6",
+    "ordered-set>=4.1.0",
+]
+
+[tool.black]
+line-length = 95
+target-version = ["py310"]
+exclude = ["ArgumentParsers.py"]
 
 [build-system]
-requires = ["poetry-core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
+requires = ["pdm-pep517>=1.0.0"]
+build-backend = "pdm.pep517.api"
